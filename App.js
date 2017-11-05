@@ -43,14 +43,18 @@ export default class App extends Component<{}> {
       toValue,
       duraction: 350,
     }).start(() => {
-      this.input.getNode().focus();
+      if (toValue > 0) {
+        this.input.getNode().focus();
+      } else {
+        this.input.getNode().blur();
+      }
     });
   };
 
   render() {
     const widthValue = this.animation.interpolate({
       inputRange: [0, 1],
-      outputRange: [0, 300],
+      outputRange: [50, 300],
     });
 
     const searchContainerStyle = {
@@ -104,6 +108,7 @@ export default class App extends Component<{}> {
             placeholder="Type to search"
             placeholderTextColor="lightgray"
             selectionColor="lightgray"
+            underlineColorAndroid="transparent"
             ref={(input) => {
               this.input = input;
             }}
@@ -142,7 +147,7 @@ const styles = StyleSheet.create({
     top: 0,
     bottom: 0,
     left: 0,
-    right: 0,
+    right: 50,
     marginLeft: 10,
     color: 'lightgray',
   },
